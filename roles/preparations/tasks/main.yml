@@ -1,0 +1,17 @@
+---
+- name: Preparations | Disable and Stop AutoUpdates
+  command: "{{item}}"
+  with_items:
+    - 'systemctl stop apt-daily.service'
+    - 'systemctl disable apt-daily.service'
+    - 'systemctl stop apt-daily.timer'
+    - 'systemctl disable apt-daily.timer'
+
+- name: Preparations | Installing Preliminary System Packages
+  apt:
+    name: "{{ item }}"
+    state: "latest"
+  with_items:
+    - 'python'
+  async: 900
+  poll: 5

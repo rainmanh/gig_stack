@@ -1,0 +1,34 @@
+---
+- name: install Common Files
+  hosts: all
+  become: yes
+  become_method: sudo
+  gather_facts: true
+  roles:
+    - preparations
+
+- name: install mysql
+  hosts: database
+  become: yes
+  become_method: sudo
+  gather_facts: true
+  roles:
+    - mysql
+
+- name: configure and deploy Wordpress
+  hosts: application
+  become: yes
+  become_method: sudo
+  gather_facts: true
+  roles:
+    - nginx
+    - php-fpm
+    - wordpress
+
+- name: FrontEnd WebServer
+  hosts: webserver
+  become: yes
+  become_method: sudo
+  gather_facts: true
+  roles:
+    - nginx

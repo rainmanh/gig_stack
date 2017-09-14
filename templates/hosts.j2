@@ -1,0 +1,11 @@
+#[localhost]
+#localhost ansible_connection=local
+
+[webserver]
+webserver ansible_host={{ __WEBSERVER_PUBLIC_IP__ }} ansible_port={{ webserver_list_ports }}
+
+[application]
+application ansible_host={{ __APPLICATION_PUBLIC_IPS__ }} ansible_port={{ application_list_ports }}
+
+[database]
+database ansible_host={{ __DATABASE_PUBLIC_IP__ }} ansible_port={{ database_list_ports }}

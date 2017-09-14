@@ -1,0 +1,22 @@
+g8client__cl:
+  url: '{{ __BASE_URL__ }}'
+  jwt: '{{ __JWT_TOKEN__ }}'
+  account: '{{ __ACCOUNT_NAME__ }}'
+
+vdc__{{ __VM_VDC__ }}:
+  g8client: 'cl'
+  location: {{ __VM_LOCATION__ }}
+
+node.ovc__{{ __VM_NAME__ }}:
+    bootdisk.size: {{ __BOOT_DISK_SIZE__ }}
+    memory : {{ __VM_MEMORY__ }}
+    os.image: '{{ __OS_IMAGE__ }}'
+    ports:
+      - '{{ __VM_PORT__ }}:22'
+   {% if var_nginx %}
+      - '80:80'
+   {% endif %}
+
+
+actions:
+  - action: install

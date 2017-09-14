@@ -1,0 +1,41 @@
+---
+- name: Install nginx
+  apt:
+    name: nginx
+    state: latest
+    update_cache: yes
+
+- name: Update nginx.conf
+  replace:
+    dest: /etc/nginx/nginx.conf
+    regexp: '# server_names_hash_bucket_size 64;'
+    replace: 'server_names_hash_bucket_size 64;'
+
+- name: Remove Default configuration
+  file:
+    path: "/etc/nginx/sites-enabled/default"
+    state: absent
+
+- name: Copy nginx configuration for wordpress
+  template: src=default.conf.j2 dest=/etc/nginx/sites-available/default.conf
+  when: inventory_hostname in groups['application']
+
+- name: Activate New NGINX configuration
+  file:
+    src: /etc/nginx/sites-available/default.conf
+    dest: /etc/nginx/sites-enabled/default.conf
+    state: link
+  notify: restart nginx
+  when: inventory_hostname in groups['application']
+
+- name: Copy nginx configuration for wordpress
+  template: src=wp.conf.j2 dest=/etc/nginx/sites-available/wp.conf
+  when: inventory_hostname in groups['webserver']
+
+- name: Activate New NGINX configuration
+  file:
+    src: /etc/nginx/sites-available/wp.conf
+    dest: /etc/nginx/sites-enabled/wp.conf
+    state: link
+  notify: restart nginx
+  when: inventory_hostname in groups['webserver']
