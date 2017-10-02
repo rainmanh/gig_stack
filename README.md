@@ -1,8 +1,8 @@
 [![Build Status](https://travis-ci.org/rainmanh/jenkins_gig.svg)](https://travis-ci.org/rainmanh/jenkins_gig)
 
 
-Jenkins GIG Deployment
-======================
+GIG Deployment
+==============
 
 ![gig_uk](https://github.com/rainmanh/jenkins_gig/blob/master/images/giguk3_new.png)
 
