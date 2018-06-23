@@ -4,8 +4,6 @@
 GIG Deployment
 ==============
 
-![gig_uk](https://github.com/rainmanh/jenkins_gig/blob/master/images/giguk3_new.png)
-
 This is a PoC for Generation a stack of Wordpress using GIG Solutions.
 
 
@@ -101,5 +99,3 @@ This script will deploy several templates previous to the ansible run:
 * ansible https://www.ansible.com
 * GIG AYS9 https://github.com/Jumpscale/ays9/
 * GIG Developer https://github.com/Jumpscale/developer
-
-http://giguk.tech
